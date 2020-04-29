@@ -28,13 +28,10 @@ namespace J0schiTweaks
         private int startTime = 1;
         private List<Agent> targetAgentList;
 
-        private String settingsFileName = "RegenConfig.cfg";
-
 
         // Метод выполняет регенерацию здоровья:
         public void regeneration()
         {
-
             // Если миссия активна:
             if(Mission.Current != null)
             {
@@ -203,31 +200,31 @@ namespace J0schiTweaks
             return resultAgents.Count > 0 ? resultAgents : new List<Agent>();
         }
 
-        public void loadFromFile()
+        public void regenerationLoadFromFile()
         {
             try
             {
-                string[] strArray = File.ReadAllLines(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/" + settingsFileName);
-                regenerationDelay = float.Parse(strArray[0].Split('#')[1].Trim());
-                regenerationValue = float.Parse(strArray[1].Split('#')[1].Trim());
-                allHealthRegeneration = (int.Parse(strArray[2].Split('#')[1].Trim())) == 1 ? true : false;
-                playerHealthRegeneration = (int.Parse(strArray[3].Split('#')[1].Trim())) == 1 ? true : false;
-                companionHealthRegeneration = (float.Parse(strArray[4].Split('#')[1].Trim())) == 1 ? true : false;
-                partyHealthRegeneration = (float.Parse(strArray[5].Split('#')[1].Trim())) == 1 ? true : false;
-                enemyLeaderHealthRegeneration = (float.Parse(strArray[6].Split('#')[1].Trim())) == 1 ? true : false;
-                enemyPartyHealthRegeneration = (float.Parse(strArray[7].Split('#')[1].Trim())) == 1 ? true : false;
+                string[] strArray = File.ReadAllLines(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/RegenConfig.cfg");
+                this.regenerationDelay = float.Parse(strArray[0].Split('#')[1].Trim());
+                this.regenerationValue = float.Parse(strArray[1].Split('#')[1].Trim());
+                this.allHealthRegeneration = (int.Parse(strArray[2].Split('#')[1].Trim())) == 1 ? true : false;
+                this.playerHealthRegeneration = (int.Parse(strArray[3].Split('#')[1].Trim())) == 1 ? true : false;
+                this.companionHealthRegeneration = (float.Parse(strArray[4].Split('#')[1].Trim())) == 1 ? true : false;
+                this.partyHealthRegeneration = (float.Parse(strArray[5].Split('#')[1].Trim())) == 1 ? true : false;
+                this.enemyLeaderHealthRegeneration = (float.Parse(strArray[6].Split('#')[1].Trim())) == 1 ? true : false;
+                this.enemyPartyHealthRegeneration = (float.Parse(strArray[7].Split('#')[1].Trim())) == 1 ? true : false;
             }
             catch(FileNotFoundException ex)
             {
                 InformationManager.DisplayMessage(new InformationMessage("Config not found, using default values"));
-                regenerationDelay = 2;
-                regenerationValue = 0.5f;
-                allHealthRegeneration = false;
-                playerHealthRegeneration = true;
-                companionHealthRegeneration = true;
-                partyHealthRegeneration = false;
-                enemyLeaderHealthRegeneration = true;
-                enemyPartyHealthRegeneration = false;
+                this.regenerationDelay = 2;
+                this.regenerationValue = 0.5f;
+                this.allHealthRegeneration = false;
+                this.playerHealthRegeneration = true;
+                this.companionHealthRegeneration = true;
+                this.partyHealthRegeneration = false;
+                this.enemyLeaderHealthRegeneration = true;
+                this.enemyPartyHealthRegeneration = false;
             }
         }
     }

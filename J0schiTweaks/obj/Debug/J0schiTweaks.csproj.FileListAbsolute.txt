@@ -1,6 +1,6 @@
 D:\Program\Steam2\steamapps\common\Mount & Blade II Bannerlord\Modules\J0schiTweaks\bin\Win64_Shipping_Client\J0schiTweaks.dll
 D:\Program\Steam2\steamapps\common\Mount & Blade II Bannerlord\Modules\J0schiTweaks\bin\Win64_Shipping_Client\J0schiTweaks.pdb
 D:\Develop\Разработка C#\MountAndBlade\New\J0schiTweaks\J0schiTweaks\obj\Debug\J0schiTweaks.csproj.CoreCompileInputs.cache
+D:\Develop\Разработка C#\MountAndBlade\New\J0schiTweaks\J0schiTweaks\obj\Debug\J0schiTweaks.csproj.CopyComplete
 D:\Develop\Разработка C#\MountAndBlade\New\J0schiTweaks\J0schiTweaks\obj\Debug\J0schiTweaks.dll
 D:\Develop\Разработка C#\MountAndBlade\New\J0schiTweaks\J0schiTweaks\obj\Debug\J0schiTweaks.pdb
-D:\Develop\Разработка C#\MountAndBlade\New\J0schiTweaks\J0schiTweaks\obj\Debug\J0schiTweaks.csprojAssemblyReference.cache
