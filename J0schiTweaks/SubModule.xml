@@ -1,5 +1,5 @@
 ﻿<Module>
-  <Name value="J0schiTweaks a Bannerlord Mod"/>
+  <Name value="J0schiTweaks"/>
   <Id value="J0schiTweaks"/>
   <Version value="v1.0.0"/>
   <SingleplayerModule value="true"/>
@@ -9,12 +9,13 @@
     <DependedModule Id="SandBoxCore"/>
     <DependedModule Id="Sandbox"/>
     <DependedModule Id="StoryMode" />
+    <DependedModule Id="ModLib" />
   </DependedModules>
   <SubModules>
     <SubModule>
       <Name value="J0schiTweaks"/>
       <DLLName value="J0schiTweaks.dll"/>
-      <SubModuleClassType value="J0schiTweaks.SubModule"/>
+      <SubModuleClassType value="J0schiTweaks.J0schiTweaks"/>
       <Tags>
         <Tag key="DedicatedServerType" value="none" />
         <Tag key="IsNoRenderModeElement" value="false" />

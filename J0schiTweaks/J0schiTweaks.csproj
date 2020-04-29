@@ -66,9 +66,13 @@
   </ItemGroup>
   <!-- Files & Classes -->
   <ItemGroup>
-    <Compile Include="SubModule.cs" />
+    <Compile Include="Module\Regeneration.cs" />
+    <Compile Include="J0schiTweaks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="SubModule.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <!-- Post-Build -->
   <PropertyGroup>
