@@ -79,9 +79,10 @@
   </ItemGroup>
   <!-- Files & Classes -->
   <ItemGroup>
-    <Compile Include="Config\ModLibSettingsEng.cs" />
-    <Compile Include="Config\ModLibSettingsRus.cs" />
-    <Compile Include="Module\Regeneration.cs" />
+    <Compile Include="Module\CompanionHorde\CompanionHorde.cs" />
+    <Compile Include="Module\Regeneration\ModLibSettingsEng.cs" />
+    <Compile Include="Module\Regeneration\ModLibSettingsRus.cs" />
+    <Compile Include="Module\Regeneration\Regeneration.cs" />
     <Compile Include="J0schiTweaks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="SubModule.xml" />
@@ -90,8 +91,10 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Config\DefaultConfig.cfg" />
     <None Include="Config\RegenConfig.cfg" />
   </ItemGroup>
+  <ItemGroup />
   <!-- Post-Build -->
   <PropertyGroup>
     <PostBuildEvent>xcopy /d /y "$(MSBuildProjectDirectory)\SubModule.xml" "D:\Program\Steam2\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\J0schiTweaks"</PostBuildEvent>

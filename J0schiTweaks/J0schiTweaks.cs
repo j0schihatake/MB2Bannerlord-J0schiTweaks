@@ -1,6 +1,6 @@
-﻿using J0schiTweaks.Config;
-using ModLib;
-using System;
+﻿using System;
+using System.IO;
+using System.Reflection;
 using TaleWorlds.Core;
 using TaleWorlds.MountAndBlade;
 
@@ -16,8 +16,8 @@ namespace J0schiTweaks
 
         public static Regeneration regeneration = null;
 
-        private static bool noGUI = false;
-        private static bool isRussian = true;
+        public static bool noGUI = false;
+        public static bool isRussian = true;
 
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
@@ -25,17 +25,18 @@ namespace J0schiTweaks
 
             try
             {
+                loadDefaultSettings();
+
                 // Подключаю модули:
                 regeneration = new Regeneration();
-                if(J0schiTweaks.noGUI)
-                {
-                    regeneration.regenerationLoadFromFile();
-                    InformationManager.DisplayMessage(new InformationMessage("J0schiTweaks loaded."));
-                }
                 if(!J0schiTweaks.noGUI)
                 {
-                    loadSettings();
+                    regeneration.loadRegenerationSettings();
                     InformationManager.DisplayMessage(new InformationMessage("J0schiTweaks loaded."));
+                }
+                else {
+                    regeneration.regenerationLoadFromFile();
+                    InformationManager.DisplayMessage(new InformationMessage("J0schiTweaks loaded from file."));
                 }
             }
             catch(Exception ex)
@@ -44,10 +45,17 @@ namespace J0schiTweaks
             }
         }
 
+        public override void OnMissionBehaviourInitialize(Mission mission) { 
+ 
+        }
+
+        public override void BeginGameStart(Game game) { 
+            
+        }
+
         protected override void OnSubModuleLoad()
         {
             base.OnSubModuleLoad();
-
         }
 
         protected override void OnApplicationTick(float dt)
@@ -67,38 +75,12 @@ namespace J0schiTweaks
             }
         }
 
-        public void loadSettings() {
-
-            if(isRussian) {
-                FileDatabase.Initialise("J0schiTweaks");
-                SettingsDatabase.RegisterSettings((SettingsBase)(FileDatabase.Get<ModLibSettingsRus>("J0schi Tweaks") ?? new ModLibSettingsRus()));
-
-                //-------------------------------Regeneration---------------------------------------------------------------
-                regeneration.regenerationDelay = ModLibSettingsRus.Instance.RegenerationDelay;
-                regeneration.regenerationValue = ModLibSettingsRus.Instance.RegenerationValue;
-                regeneration.allHealthRegeneration = ModLibSettingsRus.Instance.AllHealthRegeneration;
-                regeneration.playerHealthRegeneration = ModLibSettingsRus.Instance.PlayerHealthRegeneration;
-                regeneration.companionHealthRegeneration = ModLibSettingsRus.Instance.CompanionHealthRegeneration;
-                regeneration.partyHealthRegeneration = ModLibSettingsRus.Instance.PartyHealthRegeneration;
-                regeneration.enemyLeaderHealthRegeneration = ModLibSettingsRus.Instance.EnemyLeaderHealthRegeneration;
-                regeneration.enemyPartyHealthRegeneration = ModLibSettingsRus.Instance.EnemyPartyHealthRegeneration;
-                enableMessage = ModLibSettingsRus.Instance.EnableMessage;
-            }
-            else {
-                FileDatabase.Initialise("J0schiTweaks");
-                SettingsDatabase.RegisterSettings((SettingsBase)(FileDatabase.Get<ModLibSettingsEng>("J0schi Tweaks") ?? new ModLibSettingsEng()));
-
-                //-------------------------------Regeneration---------------------------------------------------------------
-                regeneration.regenerationDelay = ModLibSettingsEng.Instance.RegenerationDelay;
-                regeneration.regenerationValue = ModLibSettingsEng.Instance.RegenerationValue;
-                regeneration.allHealthRegeneration = ModLibSettingsEng.Instance.AllHealthRegeneration;
-                regeneration.playerHealthRegeneration = ModLibSettingsEng.Instance.PlayerHealthRegeneration;
-                regeneration.companionHealthRegeneration = ModLibSettingsEng.Instance.CompanionHealthRegeneration;
-                regeneration.partyHealthRegeneration = ModLibSettingsEng.Instance.PartyHealthRegeneration;
-                regeneration.enemyLeaderHealthRegeneration = ModLibSettingsEng.Instance.EnemyLeaderHealthRegeneration;
-                regeneration.enemyPartyHealthRegeneration = ModLibSettingsEng.Instance.EnemyPartyHealthRegeneration;
-                enableMessage = ModLibSettingsEng.Instance.EnableMessage;
-            }
+        public void loadDefaultSettings() {
+            string[] strArray = File.ReadAllLines(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/DefaultConfig.cfg");
+            int noGUIint = int.Parse(strArray[0].Split('#')[1].Trim());
+            int isRussianInt = int.Parse(strArray[1].Split('#')[1].Trim());
+            noGUI = noGUIint == 1 ? true : false;
+            isRussian = isRussianInt == 1 ? true : false;
         }
     }
 }

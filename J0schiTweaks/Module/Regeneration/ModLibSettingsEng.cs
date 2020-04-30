@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 
 namespace J0schiTweaks.Config
 {
-    class ModLibSettingsEng : SettingsBase
+    public class ModLibSettingsEng : SettingsBase
     {
         public const string InstanceID = "J0schi Tweaks";
         public const string ModuleFolder = "J0schiTweaks";

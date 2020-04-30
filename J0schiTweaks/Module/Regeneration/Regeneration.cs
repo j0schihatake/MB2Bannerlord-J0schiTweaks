@@ -6,6 +6,8 @@ using System.Linq;
 using TaleWorlds.Library;
 using System.IO;
 using System.Reflection;
+using ModLib;
+using J0schiTweaks.Config;
 
 namespace J0schiTweaks
 {
@@ -225,6 +227,42 @@ namespace J0schiTweaks
                 this.partyHealthRegeneration = false;
                 this.enemyLeaderHealthRegeneration = true;
                 this.enemyPartyHealthRegeneration = false;
+            }
+        }
+
+        public void loadRegenerationSettings()
+        {
+            if(J0schiTweaks.isRussian)
+            {
+                FileDatabase.Initialise("J0schiTweaks");
+                SettingsDatabase.RegisterSettings((SettingsBase)(FileDatabase.Get<ModLibSettingsRus>("J0schi Tweaks") ?? new ModLibSettingsRus()));
+
+                //-------------------------------Regeneration---------------------------------------------------------------
+                this.regenerationDelay = ModLibSettingsRus.Instance.RegenerationDelay;
+                this.regenerationValue = ModLibSettingsRus.Instance.RegenerationValue;
+                this.allHealthRegeneration = ModLibSettingsRus.Instance.AllHealthRegeneration;
+                this.playerHealthRegeneration = ModLibSettingsRus.Instance.PlayerHealthRegeneration;
+                this.companionHealthRegeneration = ModLibSettingsRus.Instance.CompanionHealthRegeneration;
+                this.partyHealthRegeneration = ModLibSettingsRus.Instance.PartyHealthRegeneration;
+                this.enemyLeaderHealthRegeneration = ModLibSettingsRus.Instance.EnemyLeaderHealthRegeneration;
+                this.enemyPartyHealthRegeneration = ModLibSettingsRus.Instance.EnemyPartyHealthRegeneration;
+                J0schiTweaks.enableMessage = ModLibSettingsRus.Instance.EnableMessage;
+            }
+            else
+            {
+                FileDatabase.Initialise("J0schiTweaks");
+                SettingsDatabase.RegisterSettings((SettingsBase)(FileDatabase.Get<ModLibSettingsEng>("J0schi Tweaks") ?? new ModLibSettingsEng()));
+
+                //-------------------------------Regeneration---------------------------------------------------------------
+                this.regenerationDelay = ModLibSettingsEng.Instance.RegenerationDelay;
+                this.regenerationValue = ModLibSettingsEng.Instance.RegenerationValue;
+                this.allHealthRegeneration = ModLibSettingsEng.Instance.AllHealthRegeneration;
+                this.playerHealthRegeneration = ModLibSettingsEng.Instance.PlayerHealthRegeneration;
+                this.companionHealthRegeneration = ModLibSettingsEng.Instance.CompanionHealthRegeneration;
+                this.partyHealthRegeneration = ModLibSettingsEng.Instance.PartyHealthRegeneration;
+                this.enemyLeaderHealthRegeneration = ModLibSettingsEng.Instance.EnemyLeaderHealthRegeneration;
+                this.enemyPartyHealthRegeneration = ModLibSettingsEng.Instance.EnemyPartyHealthRegeneration;
+                J0schiTweaks.enableMessage = ModLibSettingsEng.Instance.EnableMessage;
             }
         }
     }
