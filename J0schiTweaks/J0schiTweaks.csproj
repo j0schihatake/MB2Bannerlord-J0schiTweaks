@@ -79,7 +79,6 @@
   </ItemGroup>
   <!-- Files & Classes -->
   <ItemGroup>
-    <Compile Include="Module\CompanionHorde\CompanionHorde.cs" />
     <Compile Include="Module\Regeneration\ModLibSettingsEng.cs" />
     <Compile Include="Module\Regeneration\ModLibSettingsRus.cs" />
     <Compile Include="Module\Regeneration\Regeneration.cs" />

@@ -13,7 +13,11 @@ namespace J0schiTweaks
 {
     public class Regeneration
     {
-        private Agent playerAgent;
+        private Agent playerAgent = null;
+
+        private Agent allyAgent = null;
+
+        private Team playerTeam = null;
 
         // Настроечные параметры:
         public float regenerationValue;
@@ -25,10 +29,15 @@ namespace J0schiTweaks
         public bool enemyLeaderHealthRegeneration;
         public bool enemyPartyHealthRegeneration;
 
+        private int newAllUnitCount = 0;
+        private int targetAgentCount = 0;
         private int allUnitCount = 0;
+        private bool counterZero = false;
 
         private int startTime = 1;
         private List<Agent> targetAgentList;
+
+        private String state = "";
 
 
         // Метод выполняет регенерацию здоровья:
@@ -37,11 +46,19 @@ namespace J0schiTweaks
             // Если миссия активна:
             if(Mission.Current != null)
             {
-                // Начало миссии:
-                if(getAllAgentList().Count > allUnitCount || targetAgentList == null || targetAgentList.Count == 0)
-                {
+                newAllUnitCount = getAllAgentList().Count;
 
-                    J0schiTweaks.debug("getAllAgentList().Count = " + getAllAgentList().Count);
+                // Между этапами миссиии счетчик newAllUnitCount будет сбрасываться до 0. 0 - обычно в меню. 
+                if(newAllUnitCount == 0) {
+                    allUnitCount = 0;
+                }
+
+                // Начало миссии:
+                if(newAllUnitCount > allUnitCount || targetAgentList == null || targetAgentList.Count == 0)
+                {
+                    InformationManager.DisplayMessage(new InformationMessage("Выполняется перерасчет списка:"));
+
+                    J0schiTweaks.debug("getAllAgentList().Count = " + newAllUnitCount);
                     J0schiTweaks.debug("allUnitCount = " + allUnitCount);
 
                     playerAgent = null;
@@ -50,7 +67,19 @@ namespace J0schiTweaks
 
                     if(Mission.Current.MainAgent != null)
                     {
+                        J0schiTweaks.debug("playerAgent not Null");
                         playerAgent = Mission.Current.MainAgent;
+
+                        J0schiTweaks.debug("Запомнили команду игрока.");
+                        playerTeam = playerAgent.Team;
+                    }
+                    else {
+                        // Выходит игрок погиб или не учавствует.
+                        if(playerTeam != null && playerTeam.ActiveAgents.Count > 0) {
+                            J0schiTweaks.debug("За игрока взят союзный персонаж.");
+                            playerAgent = playerTeam.ActiveAgents[0];
+                        }
+
                     }
 
                     List<Agent> allAgent = getAllAgentList();
@@ -59,7 +88,6 @@ namespace J0schiTweaks
 
                     if(playerAgent != null)
                     {
-
                         J0schiTweaks.debug("Подготовка списка юнитов.");
 
                         if(playerHealthRegeneration)
@@ -73,7 +101,6 @@ namespace J0schiTweaks
                         {
                             if(a.IsHuman)
                             {
-
                                 // Отбор всех только людей:
                                 if(allHealthRegeneration)
                                 {
@@ -173,10 +200,9 @@ namespace J0schiTweaks
             else
             {
                 // Окончание миссии:
-                if(targetAgentList != null)
-                {
-                    targetAgentList = null;
-                }
+                targetAgentList = null;
+                playerAgent = null;
+                playerTeam = null;
                 allUnitCount = 0;
             }
         }
