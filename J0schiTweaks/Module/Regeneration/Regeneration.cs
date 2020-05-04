@@ -48,22 +48,26 @@ namespace J0schiTweaks
             {
                 newAllUnitCount = getAllAgentList().Count;
 
+                J0schiTweaks.debug("newAllEnemyCount = " + newAllUnitCount);
+                J0schiTweaks.debug("MissionTeamAIType = " + Mission.Current.MissionTeamAIType);
+
                 // Между этапами миссиии счетчик newAllUnitCount будет сбрасываться до 0. 0 - обычно в меню. 
                 if(newAllUnitCount == 0) {
                     allUnitCount = 0;
                 }
 
                 // Начало миссии:
-                if(newAllUnitCount > allUnitCount || targetAgentList == null || targetAgentList.Count == 0)
+                if(newAllUnitCount != allUnitCount
+                    || targetAgentList == null 
+                    || targetAgentList.Count == 0)
                 {
-                    InformationManager.DisplayMessage(new InformationMessage("Выполняется перерасчет списка:"));
-
                     J0schiTweaks.debug("getAllAgentList().Count = " + newAllUnitCount);
                     J0schiTweaks.debug("allUnitCount = " + allUnitCount);
 
                     playerAgent = null;
-
-                    targetAgentList = new List<Agent>();
+                    if(targetAgentList == null) {
+                        targetAgentList = new List<Agent>();
+                    }
 
                     if(Mission.Current.MainAgent != null)
                     {
@@ -101,6 +105,11 @@ namespace J0schiTweaks
                         {
                             if(a.IsHuman)
                             {
+                                //Исключаем повторную обработку:
+                                if(targetAgentList.Contains(a)) {
+                                    continue;
+                                }
+
                                 // Отбор всех только людей:
                                 if(allHealthRegeneration)
                                 {

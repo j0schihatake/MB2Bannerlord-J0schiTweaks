@@ -41,14 +41,14 @@ namespace J0schiTweaks.Config
 //---------------------------------------------------------------Regeneration Begin-----------------------------------------------------------------------
         // Настройки параметров:
         [XmlElement]
-        [SettingProperty("Pause between the character’s health gain (in sec).", 1, 100, 1, 30, "Pause between the character’s health gain (in sec).")]
+        [SettingProperty("Pause between the character’s health gain (in sec).", 1, 10, 1, 30, "Pause between the character’s health gain (in sec).")]
         [SettingPropertyGroup("Health Regeneration.", false)]
-        public int RegenerationDelay { get; set; } = 1;
+        public float RegenerationDelay { get; set; } = 1;
 
         [XmlElement]
         [SettingProperty("The value of the character’s health gain.", 1, 30, 1, 100, "The value by which the character's health will be increased.")]
         [SettingPropertyGroup("Health Regeneration.", false)]
-        public int RegenerationValue { get; set; } = 1;
+        public float RegenerationValue { get; set; } = 1;
 
         // Настройки регенерации игрока:
         [XmlElement]

@@ -45,8 +45,8 @@ namespace J0schiTweaks
             }
         }
 
-        public override void OnMissionBehaviourInitialize(Mission mission) { 
- 
+        /*
+        public override void OnMissionBehaviourInitialize(Mission mission) {
         }
 
         public override void BeginGameStart(Game game) { 
@@ -57,6 +57,7 @@ namespace J0schiTweaks
         {
             base.OnSubModuleLoad();
         }
+        */
 
         protected override void OnApplicationTick(float dt)
         {
