@@ -167,7 +167,7 @@ namespace J0schiTweaks
                                     }
                                 }
 
-                                if(playerHealthRegeneration)
+                                if(playerHealthRegeneration && playerAgent == a && !targetAgentList.Contains(playerAgent))
                                 {
                                     targetAgentList.Add(playerAgent);
                                     J0schiTweaks.debug("Игрок был добавлен в список.");
