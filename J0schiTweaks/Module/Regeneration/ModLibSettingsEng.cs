@@ -43,12 +43,12 @@ namespace J0schiTweaks.Config
         [XmlElement]
         [SettingProperty("Pause between the character’s health gain (in sec).", 1, 10, 1, 30, "Pause between the character’s health gain (in sec).")]
         [SettingPropertyGroup("Health Regeneration.", false)]
-        public float RegenerationDelay { get; set; } = 1;
+        public float RegenerationDelay { get; set; } = 2;
 
         [XmlElement]
         [SettingProperty("The value of the character’s health gain.", 1, 30, 1, 100, "The value by which the character's health will be increased.")]
         [SettingPropertyGroup("Health Regeneration.", false)]
-        public float RegenerationValue { get; set; } = 1;
+        public float RegenerationValue { get; set; } = 2;
 
         // Настройки регенерации игрока:
         [XmlElement]
