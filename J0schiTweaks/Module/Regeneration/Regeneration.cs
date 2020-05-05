@@ -94,12 +94,6 @@ namespace J0schiTweaks
                     {
                         J0schiTweaks.debug("Подготовка списка юнитов.");
 
-                        if(playerHealthRegeneration)
-                        {
-                            targetAgentList.Add(playerAgent);
-                            J0schiTweaks.debug("Игрок был добавлен в список.");
-                        }
-
                         // Применяем фильтры:
                         foreach(Agent a in allAgent.ToArray())
                         {
@@ -171,6 +165,12 @@ namespace J0schiTweaks
                                             continue;
                                         }
                                     }
+                                }
+
+                                if(playerHealthRegeneration)
+                                {
+                                    targetAgentList.Add(playerAgent);
+                                    J0schiTweaks.debug("Игрок был добавлен в список.");
                                 }
                             }
                         }
